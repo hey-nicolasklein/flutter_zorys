@@ -22,6 +22,13 @@ class Library extends ChangeNotifier{
     notifyListeners();
   }
 
+  ///remove book from library
+  void remove(Book item) {
+    var index = _libraryIds.indexOf(item.id);
+    _libraryIds.removeAt(index);
+    notifyListeners();
+  }
+
   /// List of items in the cart.
   List<Book> get items => _libraryIds.map((id) => CatalogModel.catalog[id]).toList();
 

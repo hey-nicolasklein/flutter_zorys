@@ -9,13 +9,13 @@ class DiscoverTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return ListView.builder(
-        itemCount: CatalogModel.catalog.length,
-        padding: EdgeInsets.all(8),
-        itemBuilder: (context, index) {
-          return _MyListItem(index);
-        },
-      );
+    return ListView.builder(
+      itemCount: CatalogModel.catalog.length,
+      padding: EdgeInsets.all(8),
+      itemBuilder: (context, index) {
+        return _MyListItem(index);
+      },
+    );
   }
 }
 
@@ -50,7 +50,9 @@ class AddButton extends StatelessWidget {
 
     return TextButton(
       onPressed: isInLibrary
-          ? null
+          ? () {
+              Provider.of<Library>(context, listen: false).remove(book);
+            }
           : () {
               var library = context.read<Library>();
               library.add(book);
