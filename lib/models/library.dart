@@ -22,6 +22,9 @@ class Library extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// List of items in the cart.
+  List<Book> get items => _libraryIds.map((id) => CatalogModel.catalog[id]).toList();
+
   /// The current catalog. Used to construct items from numeric ids.
   CatalogModel get catalog => _catalog;
 
