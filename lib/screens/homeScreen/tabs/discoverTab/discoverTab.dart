@@ -9,7 +9,6 @@ class DiscoverTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Library>(builder: (context, library, child) {
       return ListView.builder(
         itemCount: CatalogModel.catalog.length,
         padding: EdgeInsets.all(8),
@@ -17,16 +16,6 @@ class DiscoverTab extends StatelessWidget {
           return _MyListItem(index);
         },
       );
-    });
-  }
-
-  Card generateBookCard(Book book) {
-    return Card(
-      child: ListTile(
-        title: Text(book.title),
-        subtitle: Text(book.author),
-      ),
-    );
   }
 }
 
