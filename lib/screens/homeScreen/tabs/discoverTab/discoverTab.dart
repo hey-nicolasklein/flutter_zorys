@@ -32,7 +32,8 @@ class _MyListItem extends StatelessWidget {
       child: ListTile(
         title: Text(item.title),
         subtitle: Text(item.author),
-        leading: AddButton(item),
+        leading: Image(image: AssetImage('assets/covers/${item.coverName}.jpg')),
+        trailing: AddButton(item),
       ),
     );
   }
