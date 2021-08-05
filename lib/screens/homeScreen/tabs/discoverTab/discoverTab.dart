@@ -9,31 +9,55 @@ class DiscoverTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: CatalogModel.catalog.length,
-      padding: EdgeInsets.all(8),
-      itemBuilder: (context, index) {
-        return _MyListItem(index);
-      },
+    return ListView(children: [
+      SizedBox(
+        height: 100,
+      ),
+      _BookGrid(),
+    ]);
+  }
+}
+
+class _BookGrid extends StatelessWidget {
+  const _BookGrid({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      child: GridView.count(
+        physics: ScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        childAspectRatio: MediaQuery.of(context).size.height / 2600,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 0,
+        crossAxisCount: 2,
+        children: [
+          ...CatalogModel.catalog.map((element) => _MyListItem(element))
+        ],
+      ),
     );
   }
 }
 
 class _MyListItem extends StatelessWidget {
-  final int index;
+  final Book book;
 
-  const _MyListItem(this.index, {Key? key}) : super(key: key);
+  const _MyListItem(this.book, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var item = CatalogModel().getBookByPosition(index);
-
-    return Card(
-      child: ListTile(
-        title: Text(item.title),
-        subtitle: Text(item.author),
-        leading: Image(image: AssetImage('assets/covers/${item.coverName}.jpg')),
-        trailing: AddButton(item),
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Card(
+        child: ListTile(
+          title: Text(book.title),
+          subtitle: Text(book.author),
+          leading:
+              Image(image: AssetImage('assets/covers/${book.coverName}.jpg')),
+          trailing: AddButton(book),
+        ),
       ),
     );
   }
