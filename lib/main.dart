@@ -16,6 +16,12 @@ class MyApp extends StatelessWidget {
         title: 'ZORYS',
         theme: ThemeData(
           primarySwatch: Colors.red,
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600, color: Colors.black87),
+            headline3: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500, color: Colors.black87),
+            headline4: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400)
+          )
         ),
         home: HomeScreen(),
       ),

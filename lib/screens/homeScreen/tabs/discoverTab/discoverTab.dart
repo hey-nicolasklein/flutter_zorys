@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intelij_test/models/catalog.dart';
 import 'package:flutter_intelij_test/models/library.dart';
+import 'package:flutter_intelij_test/screens/homeScreen/tabs/discoverTab/bookGrid.dart';
 import 'package:provider/provider.dart';
 
 class DiscoverTab extends StatelessWidget {
@@ -13,76 +14,82 @@ class DiscoverTab extends StatelessWidget {
       SizedBox(
         height: 100,
       ),
-      _BookGrid(),
+      BookGrid(),
+      SizedBox(
+        height: 20,
+      ),
+      VerticalList(),
     ]);
   }
 }
 
-class _BookGrid extends StatelessWidget {
-  const _BookGrid({Key? key}) : super(key: key);
+class VerticalList extends StatelessWidget {
+  const VerticalList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 400,
       width: double.infinity,
-      child: GridView.count(
-        physics: ScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        childAspectRatio: MediaQuery.of(context).size.height / 2600,
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 0,
-        crossAxisCount: 2,
+      child: Column(
         children: [
-          ...CatalogModel.catalog.map((element) => _MyListItem(element))
+          _ColumnBar('See more'),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [...CatalogModel.catalog.map((e) => _CoverListItem(e))],
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-class _MyListItem extends StatelessWidget {
-  final Book book;
+class _ColumnBar extends StatelessWidget {
+  final String headline;
 
-  const _MyListItem(this.book, {Key? key}) : super(key: key);
+  const _ColumnBar(this.headline, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Card(
-        child: ListTile(
-          title: Text(book.title),
-          subtitle: Text(book.author),
-          leading:
-              Image(image: AssetImage('assets/covers/${book.coverName}.jpg')),
-          trailing: AddButton(book),
-        ),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('Recommended Stories', style: Theme.of(context).textTheme.headline2,),
+          TextButton(onPressed: () => {}, child: Text('See more'))
+        ],
       ),
     );
   }
 }
 
-class AddButton extends StatelessWidget {
-  const AddButton(this.book, {Key? key}) : super(key: key);
-
+class _CoverListItem extends StatelessWidget {
   final Book book;
+
+  const _CoverListItem(this.book, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var isInLibrary = context
-        .select<Library, bool>((library) => library.items.contains(book));
-
-    return TextButton(
-      onPressed: isInLibrary
-          ? () {
-              Provider.of<Library>(context, listen: false).remove(book);
-            }
-          : () {
-              var library = context.read<Library>();
-              library.add(book);
-            },
-      child: isInLibrary ? const Icon(Icons.check) : const Text('add'),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image(
+                height: 200,
+                image: AssetImage('assets/covers/${book.coverName}.jpg')),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(book.title, style: Theme.of(context).textTheme.headline3,),
+          Text(book.author, style: Theme.of(context).textTheme.headline4,)
+        ],
+      ),
     );
   }
 }
