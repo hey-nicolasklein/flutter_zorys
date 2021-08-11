@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
             headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             headline2: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600, color: Colors.black87),
             headline3: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500, color: Colors.black87),
-            headline4: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400)
+            headline4: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
+            headline5: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w800, color: Colors.white),
+            headline6: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400, color: Colors.white),
           )
         ),
         home: HomeScreen(),
