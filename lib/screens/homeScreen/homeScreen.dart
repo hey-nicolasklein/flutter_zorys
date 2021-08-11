@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.black54,
         currentIndex: _currentTab,
         bottomNavigationBarItems: [
-          BottomNavigationBarItem(icon: Icon(Icons.select_all_rounded), label: 'Discover'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Discover'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search')
         ],
         onIndexChange: (position){
