@@ -1,3 +1,4 @@
+import 'package:blur_bottom_bar/blur_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intelij_test/screens/homeScreen/tabs/discoverTab/discoverTab.dart';
@@ -17,17 +18,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Text('ZORYS'),
       ),
       body: IndexedStack(index: _currentTab, children: _tabs,),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BlurBottomView(
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.black54,
         currentIndex: _currentTab,
-        items: [
+        bottomNavigationBarItems: [
           BottomNavigationBarItem(icon: Icon(Icons.select_all_rounded), label: 'Discover'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search')
         ],
-        onTap: (position){
+        onIndexChange: (position){
           setState(() {
             _currentTab = position;
           });

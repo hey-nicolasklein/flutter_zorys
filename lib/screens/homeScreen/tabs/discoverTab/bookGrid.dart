@@ -12,7 +12,7 @@ class BookGrid extends StatelessWidget {
       height: 200,
       width: double.infinity,
       child: GridView.count(
-        physics: ScrollPhysics(),
+        physics: ClampingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         childAspectRatio: MediaQuery.of(context).size.height / 2600,
         crossAxisSpacing: 5,
